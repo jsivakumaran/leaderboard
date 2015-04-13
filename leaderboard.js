@@ -1,9 +1,14 @@
 PlayersList = new Mongo.Collection('players');
 
-if (Meteor.isClient) {
+if (Meteor.isClient){
+	Template.leaderboard.events({
+		'click': function(){
+		  console.log('You clicked something');
+		}
+	});
 	Template.leaderboard.helpers({
 		'player': function(){
-			return "some other text"
+			return PlayersList.find()
 		},
 		'otherHelperFunction': function(){
 			return "some other function"
