@@ -9,11 +9,15 @@ if (Meteor.isClient){
 		'click .increment': function(){
 			var selectedPlayer = Session.get('selectedPlayer');
 			PlayersList.update(selectedPlayer, {$inc: {score: 5} });
+		},
+		'click .decrement': function(){
+			var selectedPlayer = Session.get('selectedPlayer');
+			PlayersList.update(selectedPlayer, {$inc: {score: -5}});
 		}
 	});
 	Template.leaderboard.helpers({
 		'player': function(){
-			return PlayersList.find()
+			return PlayersList.find({}, {sort: {score: -1, name: 1}})
 		},
 		'selectedClass': function(){
 			var playerId = this._id;
