@@ -15,6 +15,16 @@ if (Meteor.isClient){
 			PlayersList.update(selectedPlayer, {$inc: {score: -5}});
 		}
 	});
+	Template.addPlayerForm.events({
+	  'submit form': function(){
+		event.preventDefault();
+		var playerNameVar = event.target.playerName.value;
+		PlayersList.insert({
+			name: playerNameVar,
+			score: 0
+		});		  
+	  }	
+	});
 	Template.leaderboard.helpers({
 		'player': function(){
 			return PlayersList.find({}, {sort: {score: -1, name: 1}})
